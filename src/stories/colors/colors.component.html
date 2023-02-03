@@ -1,0 +1,53 @@
+<h1>Colors</h1>
+<div class="m-auto my-4 w-2/3">
+  <p>
+    This file is auto-generated from the contents of
+    <span class="rounded bg-gray-100"> tailwind.config.js </span>
+  </p>
+
+  <p>Usage:</p>
+
+  <ul>
+    <li> For background: use bg-[color_name], for example: bg-semantic-blue</li>
+    <li> For text color: use text-[color_name], for example: text-semantic-blue</li>
+    <li> For border color: use border-[color_name], for example: border-semantic-blue</li>
+  </ul>
+</div>
+
+<hr class="my-4 w-1/2" />
+<!-- First, display the grouped colors -->
+<ng-container *ngFor="let group of objectKeys(colors)">
+  <ng-container *ngIf="!isString(colors[group])">
+    <h2 class="capitalize"> {{ group }} </h2>
+    <h3 class="text-gray-700"> {{ documentation[group] }}</h3>
+    <div class="flex flex-wrap">
+      <ng-container *ngFor="let color of objectKeys(colors[group])">
+        <ng-container
+          [ngTemplateOutlet]="card"
+          [ngTemplateOutletContext]="{ color: colors[group][color], name: group + '-' + color }"></ng-container>
+      </ng-container>
+    </div>
+    <hr class="my-4 w-1/2" />
+  </ng-container>
+</ng-container>
+
+<!--Eventually, display the ungrouped colors -->
+<div class="flex flex-wrap">
+  <ng-container *ngFor="let key of objectKeys(colors)">
+    <ng-container *ngIf="isString(colors[key])">
+      <ng-container
+        [ngTemplateOutlet]="card"
+        [ngTemplateOutletContext]="{ color: colors[key], name: key }"></ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #card let-color="color" let-name="name">
+  <div class="card">
+    <div class="color" [style.background-color]="color"></div>
+    <div class="m-2 text-xs">
+      <p>{{ name }}</p>
+      <p>{{ color }}</p>
+    </div>
+  </div>
+</ng-template>

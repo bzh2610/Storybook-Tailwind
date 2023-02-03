@@ -1,0 +1,12 @@
+:host {
+  font-family: Monaco, "Lucida Console", monospace;
+}
+
+.color {
+  flex: 1 1 auto;
+}
+
+.card {
+  @apply m-4 flex h-52 w-52 flex-col;
+  @apply overflow-hidden rounded-lg bg-white drop-shadow-lg;
+}
